@@ -1,7 +1,7 @@
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand">ISIS</a>
+          <a class="navbar-brand"><img src="<?= URL::base_uri(); ?>img/eye.png" />ISIS</a>
         </div>
         <div class="navbar-collapse collapse" id="navbar-main">
           <ul class="nav navbar-nav">

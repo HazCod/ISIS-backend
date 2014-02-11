@@ -16,6 +16,7 @@ class Admin extends Core_controller
         $this->template->user = $this->user_m->getUser($_SESSION['user']);
         $this->menu_m = Load::model('menu_m');
 		$this->units_m = Load::model('units_m');
+		$this->wifi_m = Load::model('wifi_m');
         $this->template->menuitems = $this->menu_m->getBeheerderMenu();
         $this->user = $this->user_m->getUser($_SESSION['user']);
     }
@@ -54,8 +55,22 @@ class Admin extends Core_controller
 	{
 	
 		if (isset($_SESSION['user'])) {
-		//var_dump($caption);
 		$this->template->unit = $caption;
+		
+		$wifis = $this->wifi_m->getWifi($caption);
+		if ($wifis) {
+            usort($wifis, function ($a, $b) {
+				return strcmp($a->moment, $b->moment);
+        });
+		foreach ($wifis as $wifi => $data) {
+                    
+                    $arr[$wifi]['wifi_network'] = $data->wifi_network;
+					$arr[$wifi]['caption'] = $data->caption;
+                    $arr[$wifi]['timestamp'] = $data->timestamp;
+					
+                }
+                $this->template->wifis = $arr; 
+		}
 		
 		$this->template->render('admin/units'); 
 		} else {
