@@ -42,6 +42,27 @@ class Admin extends Core_controller
         }
 	}
 
+   public function settings(){
+        if (isset($_SESSION['user'])) {
+		$this->template->render('admin/settings');
+	} else {
+		$this->redirect('home/index');
+	}
+   }
+   
+   	public function units($caption)
+	{
+	
+		if (isset($_SESSION['user'])) {
+		//var_dump($caption);
+		$this->template->unit = $caption;
+		
+		$this->template->render('admin/units'); 
+		} else {
+		$this->template->render('home/index');
+		}
+	}
+
 
 
 }

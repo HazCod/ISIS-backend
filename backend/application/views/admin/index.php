@@ -29,7 +29,7 @@
 						
                  <? endforeach; ?>
 				 <td>
-				 <a href="<?= URL::base_uri(); ?>admin/agents/<?= $this->units[$nr]['caption']; ?>"><i class="icon-trash"></i>Details</a></td>
+				 <a href="<?= URL::base_uri(); ?>admin/units/<?= $this->units[$nr]['caption']; ?>"><i class="icon-trash"></i>Details</a></td>
 				 </tr>
 				 <? endforeach; ?>
 				
@@ -37,7 +37,7 @@
             </table>
 			
         <? else: ?>
-            <p><b>No agents added</b></p>
+            <p><b>No units added</b></p>
         <? endif; ?>
 		
 		
