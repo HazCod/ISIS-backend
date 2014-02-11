@@ -2,7 +2,7 @@
     <div class="span12">
         <h3>Login</h3>
 
-        <form method="post" action="http://www.d00med.net/isis/backend/home/login">
+        <form method="post" action="<?= URL::base_uri(); ?>/home/login">
 
             <div class="control-group <?= $this->form->getFieldStatus('username'); ?>">
                 <label for="username">Username</label>
