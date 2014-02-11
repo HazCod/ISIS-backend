@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <?php $this->renderPartial('headermeta'); ?>
@@ -19,7 +19,6 @@
 </div> <!-- /container -->
 
 <?php $this->renderPartial('footer'); ?>
-<?php $this->renderPartial('scripts'); ?>
 
 </body>
 </html>

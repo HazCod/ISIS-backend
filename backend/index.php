@@ -12,7 +12,6 @@ require_once(FRAMEWORK_PATH . 'DB.php');
 require_once(FRAMEWORK_PATH . 'Controller.php');
 require_once(FRAMEWORK_PATH . 'Template.php');
 require_once(FRAMEWORK_PATH . 'Form.php');
-require_once(FRAMEWORK_PATH . 'paswoord.php');
 
 // abstract classes
 require_once(FRAMEWORK_PATH . 'Core_controller.php');

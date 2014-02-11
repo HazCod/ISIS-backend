@@ -1,1 +1,0 @@
-<a href="<?php echo URL::base_uri()?>login/loguit" class="btn-small pull-right">afmelden</a>

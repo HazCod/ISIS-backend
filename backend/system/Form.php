@@ -72,6 +72,11 @@ class Form
         return $return;
     }
 
+    public function isFieldMSGset()
+    {
+        return !(empty($this->fieldmessage));
+    }
+
     public function getFieldMessage($key)
     {
         if (isset($this->fieldmessage[$key]['message'])) {
@@ -111,7 +116,7 @@ class Form
             $this->fieldmessage[$datekey]['status'] = 'success';
             $return = true;
         } else {
-            $this->fieldmessage[$datekey]['message'] = 'must be a valid date';
+            $this->fieldmessage[$datekey]['message'] = 'must be a valid date' . $datekey . $daykey . $monthkey . $yearkey ;
             $this->fieldmessage[$datekey]['status'] = 'error';
             $return = false;;
         }
@@ -119,13 +124,13 @@ class Form
         return $return;
     }
 
-    public function validateLength($key, $minlength = 1, $maxlength= 100000, $method = 'post')
+    public function validateLength($key, $minlength = 1, $method = 'post')
     {
-        if ((isset($this->safe[$method]->$key)) && (strlen($this->safe[$method]->$key) >= $minlength) && (strlen($this->safe[$method]->$key)<=$maxlength)) {
+        if ((isset($this->safe[$method]->$key)) && (strlen($this->safe[$method]->$key) >= $minlength)) {
             $this->fieldmessage[$key]['status'] = 'success';
             $return = true;
         } else {
-            $this->fieldmessage[$key]['message'] = "moet tussen $minlength en $maxlength tekens lang zijn";
+            $this->fieldmessage[$key]['message'] = "Must be at least $minlength characters long.";
             $this->fieldmessage[$key]['status'] = 'error';
             $return = false;
         }
@@ -167,7 +172,7 @@ class Form
             $this->fieldmessage[$key]['status'] = 'success';
             $return = true;
         } else {
-            $this->fieldmessage[$key]['message'] = "moet tussen $min en  $max zijn.";
+            $this->fieldmessage[$key]['message'] = "Must be between $min and $max.";
             $this->fieldmessage[$key]['status'] = 'error';
             $return = false;
         }
@@ -175,52 +180,18 @@ class Form
         return $return;
     }
 
-    public function validateMail($key, $method='post')
+    public function validateEmail($key, $method = 'post')
     {
-        $uit=false;
-        if ((isset ($this->safe[$method]->$key)) && (filter_var($this->safe[$method]->$key,FILTER_VALIDATE_EMAIL)))
-        {
-            $this->fieldmessage[$key]['status']='success';
-            $uit= true;
-        }
-        else
-        {
-            $this->fieldmessage[$key]['status']='error';
-            $this->fieldmessage[$key]['message']='geen geldig email-adres';
-        }
-        return $uit;
-    }
-
-    public function checkuniekelogin($user, $key, $method='post')
-    {
-        if ($user && $user->$key == $this->safe[$method]->$key)
-        {
-            $this->fieldmessage[$key]["status"] = "error";
-            $this->fieldmessage[$key]["message"] = "deze $key bestaat al";
-            $uit = false;
-        }
-        else
-        {
+        if ((isset($this->safe[$method]->$key)) && (filter_var($this->safe[$method]->$key, FILTER_VALIDATE_EMAIL))) {
             $this->fieldmessage[$key]['status'] = 'success';
-            $uit= true;
+            $return = true;
+        } else {
+            $this->fieldmessage[$key]['message'] = "$this->safe[$method]->$key is not a valid email-adress.";
+            $this->fieldmessage[$key]['status'] = 'error';
+            $return = false;
         }
-        return $uit;
-    }
 
-    public function komtvoorin ($key, $verzameling, $mehod="post")
-    {
-        if (in_array($this->safe[$mehod]->$key, $verzameling))
-        {
-            $uit = true;
-            $this->fiedlmessage[$key]['status']= succes;
-        }
-        else
-        {
-            $uit= false;
-            $this->fieldmessage[$key]['status']="error";
-            $this->fieldmessage[$key]['message']="dit is geen geldige waarde";
-        }
-        return $uit;
+        return $return;
     }
 
 

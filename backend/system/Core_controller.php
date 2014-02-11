@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 abstract class Core_controller
 {
@@ -24,6 +24,27 @@ abstract class Core_controller
             return $this->data[$name];
         }
         return false;
+    }
+
+    function generatePassword ($length = 8)
+    {
+        //http://www.laughing-buddha.net/php/password
+        $password = "";
+        $possible = "2346789bcdfghjkmnpqrtvwxyzBCDFGHJKLMNPQRTVWXYZ";
+        $maxlength = strlen($possible);
+        if ($length > $maxlength) {
+            $length = $maxlength;
+        }
+        $i = 0;
+        while ($i < $length) {
+
+            $char = substr($possible, mt_rand(0, $maxlength-1), 1);
+            if (!strstr($password, $char)) {
+                $password .= $char;
+                $i++;
+            }
+        }
+        return $password;
     }
 
     public function setFlashmessage($message, $status = 'success')
@@ -62,25 +83,5 @@ abstract class Core_controller
     {
         header('Location: ' .  URL::base_uri($newlocation));
         exit();
-    }
-
-    public function controleerbevoegdheid($rol)
-    {
-        $rol= (is_array($rol)) ? $rol : array($rol);
-        $uit = false;
-        if (isset ($_SESSION['rol']))
-        {
-            if (in_array($_SESSION['rol'],$rol))
-            {
-                $uit= true;
-            }
-        }
-
-        if (!$uit) {
-            $this->setFlashmessage("u heeft niet de juiste rechten om deze pagina te zien","error");
-            $this->redirect("Login");
-        }
-
-        return $uit;
     }
 }

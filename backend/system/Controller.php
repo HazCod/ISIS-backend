@@ -1,5 +1,4 @@
 <?php
-
 class Controller
 {
     const DEFAULT_CONTROLLER = "Home";
@@ -10,7 +9,6 @@ class Controller
     private $controller = self::DEFAULT_CONTROLLER;
     private $action = self::DEFAULT_ACTION;
     private $params = array();
-
     public function __construct()
     {
         $this->parseUri();

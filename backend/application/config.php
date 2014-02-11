@@ -3,17 +3,16 @@
 date_default_timezone_set('Europe/Brussels');
 
 // config of the database connection
-require_once('../../.db_password.php');
+require_once('../.db_password.php');
 
 $db_config = array(
-    'driver' => 'pgsql',
+    'driver' => 'mysql',
     'username' => $username,
     'password' => $password,
-    'schema' => 'pr537398', // change this
+    'schema' => 'c7185zrc_isis',
     'dsn' => array(
         'host' => 'localhost',
-       // "host"=>"gegevensbanken.khleuven.be",
-        'dbname' => '2TX35', // and change this too
-        'port' => '51213',
+        'dbname' => 'c7185zrc_isis',
+        'port' => '3306',
     )
 );
