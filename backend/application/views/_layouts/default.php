@@ -6,19 +6,19 @@
 
 <body>
 
-<?php $this->renderPartial('navbar'); ?>
+	<?php $this->renderPartial('navbar'); ?>
 
-<div class="container">
-    <?php $this->renderPartial('flashmessage'); ?>
+	<div class="container">
+    		<h2 class="display:none;"><?php echo $this->getPagetitle(); ?></h2>
 
-    <h1><?php echo $this->getPagetitle(); ?></h1>
+    		<?php $this->getContent(); ?>
+    		<hr>
 
-    <?php $this->getContent(); ?>
-    <hr>
+    		<?php $this->renderPartial('footer'); ?>
+	</div> <!-- /container -->
 
-</div> <!-- /container -->
-
-<?php $this->renderPartial('footer'); ?>
-
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/bootswatch.js"></script>
 </body>
 </html>

@@ -1,6 +1,4 @@
-    <?php
-
-abstract class Core_controller
+<?php abstract class Core_controller
 {
     protected $template;
     protected $data = array();
@@ -81,7 +79,11 @@ abstract class Core_controller
 
     public function redirect($newlocation = '')
     {
-        header('Location: ' .  URL::base_uri($newlocation));
-        exit();
+        if (!headers_sent($filename, $linenum)) {
+		header('Location: ' .  URL::base_uri($newlocation));
+        	exit();
+	} else {
+		echo "Headers already sent in $filename on line $linenum\n";
+	}
     }
 }

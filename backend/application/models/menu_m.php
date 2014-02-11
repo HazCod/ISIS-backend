@@ -2,16 +2,6 @@
 
 class Menu_m extends Core_db
 {
-    public function getReturnMenu()
-    {
-        $menuitems = array(
-            array(
-                'link' => 'home',
-                'description' => 'Terug',
-            ),
-        );
-        return $menuitems;
-    }
 
     public function getStartmenu()
     {
@@ -24,54 +14,16 @@ class Menu_m extends Core_db
         return $menuitems;
     }
 
-    public function getStudentmenu()
-    {
-        $menuitems = array(
-            array(
-                'link' => 'student/index',
-                'description' => 'Boekingen',
-            ),
-        );
-        return $menuitems;
-    }
-
-    public function getStudieadviseurmenu()
-    {
-        $menuitems = array(
-            array(
-                'link' => 'studieadviseur/index',
-                'description' => 'Boekingen',
-            ),
-            array(
-                'link' => 'studieadviseur/extraSorteerVak',
-                'description' => 'Afspraken per vak',
-            ),
-        );
-        return $menuitems;
-    }
-
     public function getBeheerderMenu()
     {
         $menuitems = array(
             array(
-                'link' => 'beheerder/studentbeheer',
-                'description' => 'Beheer studenten',
+                'link' => 'admin/index',
+                'description' => 'Management',
             ),
             array(
-                'link' => 'beheerder/lectorbeheer',
-                'description' => 'Beheer lectoren',
-            ),
-            array(
-                'link' => 'beheerder/vakbeheer',
-                'description' => 'Beheer cursussen',
-            ),
-            array(
-                'link' => 'beheerder/nieuwsbeheer',
-                'description' => 'Beheer nieuwsitems',
-            ),
-            array(
-                'link' => 'home',
-                'description' => 'Start',
+                'link' => 'admin/settings',
+                'description' => 'Settings',
             ),
         );
         return $menuitems;

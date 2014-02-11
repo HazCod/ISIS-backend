@@ -1,18 +1,21 @@
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-            <div class="nav-collapse">
-                <ul class="nav">
-                    <?php foreach ($this->menuitems as $menuitem): ?>
-                        <li class="<?php echo ($menuitem['link'] == URL::getCurrentPath()) ? 'active' : ''; ?>"><a href="<?php echo URL::base_uri(); ?><?php echo $menuitem['link']; ?>"><?php echo $menuitem['description']; ?></a></li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand">ISIS</a>
         </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+          <? foreach ($this->menuitems as $menuitem): ?>
+            <li class="<?= ($menuitem['link'] == URL::getCurrentPath()) ? 'active' : ''; ?>">
+              <a href="<?= URL::base_uri(); ?><?= $menuitem['link']; ?>"><?= $menuitem['description']; ?></a>
+            </li>
+          <? endforeach; ?>
+          </ul>
+          <? if (isset($_SESSION['user'])): ?>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="<?= URL::base_uri(); ?>home/logout">Logout</a></li>
+          </ul>
+          <? endif; ?>
+        </div>
+      </div>
     </div>
-</div>

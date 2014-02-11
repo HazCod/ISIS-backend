@@ -117,7 +117,7 @@ class Form
             $return = true;
         } else {
             $this->fieldmessage[$datekey]['message'] = 'must be a valid date' . $datekey . $daykey . $monthkey . $yearkey ;
-            $this->fieldmessage[$datekey]['status'] = 'error';
+            $this->fieldmessage[$datekey]['status'] = 'danger';
             $return = false;;
         }
 
@@ -131,7 +131,7 @@ class Form
             $return = true;
         } else {
             $this->fieldmessage[$key]['message'] = "Must be at least $minlength characters long.";
-            $this->fieldmessage[$key]['status'] = 'error';
+            $this->fieldmessage[$key]['status'] = 'danger';
             $return = false;
         }
 
@@ -145,7 +145,7 @@ class Form
             $return = true;
         } else {
             $this->fieldmessage[$key]['message'] = "Must be numeric.";
-            $this->fieldmessage[$key]['status'] = 'error';
+            $this->fieldmessage[$key]['status'] = 'danger';
             $return = false;
         }
 
@@ -159,7 +159,7 @@ class Form
             $return = true;
         } else {
             $this->fieldmessage[$key]['message'] = "Must be an integer.";
-            $this->fieldmessage[$key]['status'] = 'error';
+            $this->fieldmessage[$key]['status'] = 'danger';
             $return = false;
         }
 
@@ -173,7 +173,7 @@ class Form
             $return = true;
         } else {
             $this->fieldmessage[$key]['message'] = "Must be between $min and $max.";
-            $this->fieldmessage[$key]['status'] = 'error';
+            $this->fieldmessage[$key]['status'] = 'danger';
             $return = false;
         }
 
@@ -187,7 +187,7 @@ class Form
             $return = true;
         } else {
             $this->fieldmessage[$key]['message'] = "$this->safe[$method]->$key is not a valid email-adress.";
-            $this->fieldmessage[$key]['status'] = 'error';
+            $this->fieldmessage[$key]['status'] = 'danger';
             $return = false;
         }
 

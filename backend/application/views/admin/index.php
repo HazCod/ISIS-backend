@@ -1,21 +1,47 @@
-<div class="row">
-
-    <div class="pull-right">
-        <p><a href="https://536729.webontwerp.khleuven.be/project/home/logout">Logout</a>&nbsp;&nbsp;&nbsp;Beheerder: <b><?= $this->user->voornaam . ' ' . $this->user->achternaam ?></b>.</p>
-    </div>
-
-
-
-    <div class="span12">
-
-        <h2>Welkom beheerder!</h2>
-        <h3>Wat wenst u te doen ?</h3>
-        <div class="form-actions">
-        <button type="submit" onclick="location.href='https://536729.webontwerp.khleuven.be/project/beheerder/studentbeheer '" class="btn btn-primary">Beheer studenten</button>
-        <button type="submit" onclick="location.href='https://536729.webontwerp.khleuven.be/project/beheerder/lectorbeheer'" class="btn btn-primary">Beheer lectoren</button>
-        <button type="submit" onclick="location.href='https://536729.webontwerp.khleuven.be/project/beheerder/vakbeheer'" class="btn btn-primary">Beheer vakken</button>
-        <button type="submit" onclick="location.href='https://536729.webontwerp.khleuven.be/project/beheerder/nieuwsbeheer'" class="btn btn-primary">Beheer nieuwsitems</button>
+<br><br><br>
+<div class="bs-docs-section">
+        <div class="row">
+		<? $this->renderPartial('flashmessage'); ?>
         </div>
+<div class="row">
+    <div class="span12">
+        <h2>Unit Interface</h2>
+		
+		<? if ($this->units): ?>
+
+            <table class="table table-striped">
+
+                <thead>
+                <tr>
+                    <? foreach ($this->units[0] as $titel => $data): ?>
+                        <th><?= ucfirst($titel); ?></th>
+                    <? endforeach; ?>
+                    <th></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <? foreach ($this->units as $nr => $data): ?>
+				<tr>
+					<? foreach ($data as $nrunit => $unit): ?>
+					
+                        <td><?= $unit; ?></td>
+						
+                 <? endforeach; ?>
+				 <td>
+				 <a href="<?= URL::base_uri(); ?>admin/agents/<?= $this->units[$nr]['caption']; ?>"><i class="icon-trash"></i>Details</a></td>
+				 </tr>
+				 <? endforeach; ?>
+				
+                </tbody>
+            </table>
+			
+        <? else: ?>
+            <p><b>No agents added</b></p>
+        <? endif; ?>
+		
+		
+    </div>
 
 
 

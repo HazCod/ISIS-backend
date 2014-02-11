@@ -21,9 +21,9 @@ class Home extends Core_controller
     public function index()
     {
         if (isset($_SESSION['user'])) {
-        $this->redirect('admin/index');    
+        	$this->redirect('admin/index');    
         } else {
-            $this->template->render('home/index');
+        	$this->template->render('home/index');
         }
     }
 
@@ -39,13 +39,13 @@ class Home extends Core_controller
             if ($this->login_m->isValidLogin($formdata->username, sha1('zotte' . $formdata->password . 'pompoen'))) {
 
                 $_SESSION['user'] = $formdata->username;
-                $this->setFlashmessage('Correct ingelogd!');
+                $this->setFlashmessage('Successfully logged in! Welcome back commander.');
                 $this->redirect('home/index');
 
             } else {
 
                 $this->template->formdata = $formdata;
-                $this->setCurrentFlashmessage('Foute login/wachtwoord', 'error');
+                $this->setCurrentFlashmessage('Wrong username and/or password.', 'danger');
                 $this->template->render('home/index');
 
             }
@@ -53,7 +53,7 @@ class Home extends Core_controller
         } else {
 
             $this->template->formdata = $formdata;
-            $this->setCurrentFlashmessage('Username of wactwoord te kort.', 'error');
+            $this->setCurrentFlashmessage('Wrong username and/or password', 'danger');
             $this->template->render('home/index');
 
         }
@@ -62,8 +62,8 @@ class Home extends Core_controller
     public function logout()
     {
         unset($_SESSION['user']);
-        $this->setCurrentFlashmessage('U bent uitgelogd');
-        $this->template->render('home/index');
+        $this->setFlashmessage('U bent uitgelogd');
+        $this->redirect("home/index");
     }
 
 

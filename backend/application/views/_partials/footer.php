@@ -1,4 +1,7 @@
 <footer>
-    <p>Intruding Sniffing Information System</p>
-	<p>Made by Dylan Crokaert, Niels Hofmans, Joost Fock<p>
+<div class="row">
+  <div class="col-lg-12">
+    <p>Made by Dylan Crockaert, Niels Hofmans, Joost Fock. Code released under on <a href="https://github.com/HazCod/">GitHub</a>.</p>
+  </div>
+</div> 
 </footer>
