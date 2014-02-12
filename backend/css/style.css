@@ -5969,3 +5969,7 @@ input[type="color"]:focus,
 .affix {
   position: fixed;
 }
+#logo {
+ padding-bottom: 5px;
+ padding-right: 5px;
+}

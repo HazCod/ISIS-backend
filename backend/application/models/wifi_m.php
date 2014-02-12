@@ -8,7 +8,7 @@ class Wifi_m extends Core_db
 
     {
         parent::__construct();
-        $this->table = 'wnets';
+        $this->table = 'ap_info';
     }
 	
 	public function getWifi($captions)
@@ -18,11 +18,33 @@ class Wifi_m extends Core_db
 
         $query = "
             SELECT *
-            FROM wnets
+            FROM ap_info
 			WHERE caption = ?
+			GROUP BY wifi_network
         ";
 
         $bookings = $this->db->query($query,$captions)->getResult();
+
+        if ($bookings) {
+            $result = $bookings;
+        }
+
+        return $result;
+		
+	}
+	
+		public function getDetailWifi($caption,$wifi_network)
+	{
+	
+		$result = false;
+
+        $query = "
+            SELECT *
+            FROM ap_info
+			WHERE (caption = '$caption') and (wifi_network = '$wifi_network')
+        ";
+
+        $bookings = $this->db->query($query,$captions,$wifi_network)->getResult();
 
         if ($bookings) {
             $result = $bookings;

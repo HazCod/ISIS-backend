@@ -62,7 +62,7 @@ class Home extends Core_controller
     public function logout()
     {
         unset($_SESSION['user']);
-        $this->setFlashmessage('U bent uitgelogd');
+        $this->setFlashmessage('You are logged out');
         $this->redirect("home/index");
     }
 

@@ -5,16 +5,15 @@
         </div>
 <div class="row">
     <div class="span12">
-        <h2>Unit <b><?= $this->unit; ?></b></h2>	
-		<h3>Found wifi connections: </h3>
+        <h2>Connection <b><?= $this->connection; ?></b> details:</h2>
 		
-		<? if ($this->wifis): ?>
+		<? if ($this->detailswifi): ?>
 
             <table class="table table-striped">
 
                 <thead>
                 <tr>
-                    <? foreach ($this->wifis[0] as $titel => $data): ?>
+                    <? foreach ($this->detailswifi[0] as $titel => $data): ?>
                         <th><?= ucfirst($titel); ?></th>
                     <? endforeach; ?>
                     <th></th>
@@ -22,15 +21,13 @@
                 </thead>
 
                 <tbody>
-                <? foreach ($this->wifis as $nr => $data): ?>
+                <? foreach ($this->detailswifi as $nr => $data): ?>
 				<tr>
 					<? foreach ($data as $nrunit => $unit): ?>
 					
                         <td><?= $unit; ?></td>
 						
                  <? endforeach; ?>
-				 <td>
-				 <a href="<?= URL::base_uri(); ?>admin/detailWifi/<?= $this->unit; ?>/<?= $this->wifis[$nr]['wifi_network']; ?>"><i class="icon-trash"></i>Details</a></td>
 				 </tr>
 				 <? endforeach; ?>
 				
@@ -38,7 +35,7 @@
             </table>
 			
         <? else: ?>
-            <p><b>No wireless networks found yet</b></p>
+            <p><b>No details for this network found yet.</b></p>
         <? endif; ?>
 		
     </div>

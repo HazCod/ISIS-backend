@@ -19,6 +19,8 @@ class Admin extends Core_controller
 		$this->wifi_m = Load::model('wifi_m');
         $this->template->menuitems = $this->menu_m->getBeheerderMenu();
         $this->user = $this->user_m->getUser($_SESSION['user']);
+		
+		$this->template->setPagetitle('Project ISIS');
     }
 
     public function index()
@@ -65,8 +67,8 @@ class Admin extends Core_controller
 		foreach ($wifis as $wifi => $data) {
                     
                     $arr[$wifi]['wifi_network'] = $data->wifi_network;
-					$arr[$wifi]['caption'] = $data->caption;
-                    $arr[$wifi]['timestamp'] = $data->timestamp;
+                    $arr[$wifi]['last_updated'] = $data->last_updated;
+					$arr[$wifi]['encryption'] = $data->encryption;
 					
                 }
                 $this->template->wifis = $arr; 
@@ -77,7 +79,79 @@ class Admin extends Core_controller
 		$this->template->render('home/index');
 		}
 	}
+	
+	public function addUnit()
+	{
+	if (isset($_SESSION['user'])) {
+	
+		if ($_POST) {
+		$formdata = $this->form->getPost();
+		$this->units_m->addUnit($formdata->caption,$formdata->location);
+		$this->setFlashmessage('Unit has been added');
+		$this->redirect('admin/index');
+		} else {
+		$this->template->render('admin/addUnit'); 
+		}
+	} else {
+		$this->template->render('home/index');
+		}
+	}
+	
+	public function editLocation($caption)
+	{
+	if (isset($_SESSION['user'])) {
+		if ($_POST) {
+		$formdata = $this->form->getPost();
+		$this->units_m->editLocation($formdata->location,$caption);
+		$this->setFlashmessage('Location has been changed');
+		$this->redirect('admin/index');
+		} else {
+		$this->template->unit = $caption;
+		$this->template->render('admin/editLocation');
+		}
+	} else {
+		$this->template->render('home/index');
+	}
+	}
+	
+	public function deleteUnit($caption)
+	{
+	if (isset($_SESSION['user'])) {
+		$this->units_m->removeUnit($caption);
+		$this->setFlashmessage('Unit destroyed');
+		$this->redirect('admin/index');
+	} else {
+		$this->template->render('home/index');
+	}
+	}
 
+	
+	public function detailWifi($caption,$wifi_network)
+	{
+	
+		if (isset($_SESSION['user'])) {
+		$this->template->connection = $wifi_network;
+		
+		$detailswifi = $this->wifi_m->getDetailWifi($caption,$wifi_network);
+		if ($detailswifi) {
+            usort($detailswifi, function ($a, $b) {
+				return strcmp($a->moment, $b->moment);
+        });
+		foreach ($detailswifi as $wifi => $data) {
+                    
+                    $arr[$wifi]['mac_adress'] = $data->mac_adress;
+                    $arr[$wifi]['channel'] = $data->channel;
+					$arr[$wifi]['quality'] = $data->quality;
+					
+                }
+                $this->template->detailswifi = $arr; 
+		}
+		
+		$this->template->render('admin/detailWifi'); 
+		} else {
+		$this->template->render('home/index');
+		}
+	}
 
 
 }

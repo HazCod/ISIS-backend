@@ -29,7 +29,10 @@
 						
                  <? endforeach; ?>
 				 <td>
-				 <a href="<?= URL::base_uri(); ?>admin/units/<?= $this->units[$nr]['caption']; ?>"><i class="icon-trash"></i>Details</a></td>
+				 <a href="<?= URL::base_uri(); ?>admin/editLocation/<?= $this->units[$nr]['caption']; ?>"><i class="icon-trash"></i>Edit location&nbsp&nbsp&nbsp </a>
+				 <a href="<?= URL::base_uri(); ?>admin/units/<?= $this->units[$nr]['caption']; ?>"><i class="icon-trash"></i>Details&nbsp&nbsp&nbsp</a>
+				 <a href="<?= URL::base_uri(); ?>admin/deleteUnit/<?= $this->units[$nr]['caption']; ?>"><i class="icon-trash"></i>Remove</a>
+				 </td>
 				 </tr>
 				 <? endforeach; ?>
 				
@@ -39,6 +42,10 @@
         <? else: ?>
             <p><b>No units added</b></p>
         <? endif; ?>
+		
+		<div class="form-actions">
+            <button type="submit" onclick="location.href='<?= URL::base_uri(); ?>admin/addUnit'" class="btn btn-primary">New unit</button>
+        </div>
 		
 		
     </div>
