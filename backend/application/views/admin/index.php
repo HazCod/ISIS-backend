@@ -29,9 +29,10 @@
 						
                  <? endforeach; ?>
 				 <td>
-				 <a href="<?= URL::base_uri(); ?>admin/editLocation/<?= $this->units[$nr]['caption']; ?>"><i class="icon-trash"></i>Edit location&nbsp&nbsp&nbsp </a>
-				 <a href="<?= URL::base_uri(); ?>admin/units/<?= $this->units[$nr]['caption']; ?>"><i class="icon-trash"></i>Details&nbsp&nbsp&nbsp</a>
-				 <a href="<?= URL::base_uri(); ?>admin/deleteUnit/<?= $this->units[$nr]['caption']; ?>"><i class="icon-trash"></i>Remove</a>
+				 <a href="<?= URL::base_uri(); ?>admin/units/<?= $this->units[$nr]['caption']; ?>"><i class="icon-trash"></i>Details</a>&nbsp&nbsp&nbsp
+				 <a href="<?= URL::base_uri(); ?>admin/editLocation/<?= $this->units[$nr]['caption']; ?>"><i class="icon-trash"></i>Edit location</a>&nbsp&nbsp&nbsp
+				 <a href="<?= URL::base_uri(); ?>admin/deleteUnit/<?= $this->units[$nr]['caption']; ?>"><i class="icon-trash"></i>Remove</a>&nbsp&nbsp&nbsp
+				 <a href="<?= URL::base_uri(); ?>admin/checkoutUnit/<?= $this->units[$nr]['caption']; ?>"><i class="icon-trash"></i>Update</a>
 				 </td>
 				 </tr>
 				 <? endforeach; ?>

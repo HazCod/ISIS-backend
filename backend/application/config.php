@@ -3,7 +3,7 @@
 date_default_timezone_set('Europe/Brussels');
 
 // config of the database connection
-require_once('../.db_password.php');
+require_once('.db_password.php');
 
 $db_config = array(
     'driver' => 'mysql',

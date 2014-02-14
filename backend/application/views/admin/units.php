@@ -30,6 +30,8 @@
 						
                  <? endforeach; ?>
 				 <td>
+				 <a href="<?= URL::base_uri(); ?>admin/connectWifiUnit/<?= $this->unit; ?>/<?= $this->wifis[$nr]['wifi_network']; ?>"><i class="icon-trash"></i>Connect</a>&nbsp&nbsp&nbsp 
+				 <a href="<?= URL::base_uri(); ?>admin/crackWifiUnit/<?= $this->unit; ?>/<?= $this->wifis[$nr]['wifi_network']; ?>"><i class="icon-trash"></i>Crack&nbsp&nbsp&nbsp </a>
 				 <a href="<?= URL::base_uri(); ?>admin/detailWifi/<?= $this->unit; ?>/<?= $this->wifis[$nr]['wifi_network']; ?>"><i class="icon-trash"></i>Details</a></td>
 				 </tr>
 				 <? endforeach; ?>
