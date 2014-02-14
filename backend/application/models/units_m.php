@@ -29,6 +29,11 @@ class Units_m extends Core_db
 
         return $result;
     }
+
+    public function getLastSeen( $caption ){
+   		$query = "SELECT last_seen FROM units WHERE caption = '$caption'";
+        return $this->db->query($query)->getRow();
+    }
 	
 	public function addUnit($caption,$location)
 	
@@ -49,6 +54,24 @@ class Units_m extends Core_db
 	{
 	
 		$query = "DELETE FROM units where caption = '$caption'";
+        return $this->db->query($query);
+	
+	}
+	
+	public function addAssignment($assignment,$caption)
+	{
+	
+	    $query = "INSERT INTO assignments (assignment,status,caption)
+        VALUES ('$assignment','new','$caption')";
+        return $this->db->query($query);
+	
+	}
+	
+	public function addAssignmentParam($assignment,$caption,$wifi_network)
+	{
+	
+		$query = "INSERT INTO assignments (assignment,status,caption,parameter)
+        VALUES ('$assignment','new','$caption','$wifi_network')";
         return $this->db->query($query);
 	
 	}

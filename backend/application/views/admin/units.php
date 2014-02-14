@@ -5,9 +5,10 @@
         </div>
 <div class="row">
     <div class="span12">
-        <h2>Unit <b><?= $this->unit; ?></b></h2>	
-		<h3>Found wifi connections: </h3>
-		
+        <h2>Unit <b><?= $this->unit; ?></b></h2>
+        <p><strong>Last seen:</strong>&nbsp;<?= $this->lastseen; ?></p>
+        
+		<h3>Found WiFi connections</h3>
 		<? if ($this->wifis): ?>
 
             <table class="table table-striped">
@@ -44,8 +45,52 @@
         <? endif; ?>
 		
     </div>
-	
     </div>
+	
+	
+	<div class="row">
+    <div class="span12">
+		<h3>Last 10 assignments</h3>
+		
+		<? if ($this->assignments): ?>
+
+            <table class="table table-striped">
+
+                <thead>
+                <tr>
+                    <? foreach ($this->assignments[0] as $titel2 => $data2): ?>
+                        <th><?= ucfirst($titel2); ?></th>
+                    <? endforeach; ?>
+                    <th></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <? foreach ($this->assignments as $nr => $data2): ?>
+				<tr>
+					<? foreach ($data2 as $nrunit2 => $unit2): ?>
+					    <? if ($unit2 == 'executed'): ?>
+                        <td style="color:green;">
+                        <? elseif ($unit2 == 'new'): ?>
+                        <td style="color:orange;">
+                        <? elseif ($unit2 == 'errors'): ?>
+                        <td style="color:red;">
+                        <? else: ?><td><? endif; ?>
+                        <?= $unit2; ?></td>
+						
+                 <? endforeach; ?>
+				 </tr>
+				 <? endforeach; ?>
+				
+                </tbody>
+            </table>
+			
+        <? else: ?>
+            <p><b>No assignments yet</b></p>
+        <? endif; ?>
+		
+	</div>
+	</div>
 
 </div>
 
