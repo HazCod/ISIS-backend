@@ -33,7 +33,8 @@
 				 <a href="<?= URL::base_uri(); ?>admin/editLocation/<?= $this->units[$nr]['caption']; ?>"><i class="icon-trash"></i>Edit location</a>&nbsp&nbsp&nbsp
 				 <a href="<?= URL::base_uri(); ?>admin/deleteUnit/<?= $this->units[$nr]['caption']; ?>"><i class="icon-trash"></i>Remove</a>&nbsp&nbsp&nbsp
 				 <a href="<?= URL::base_uri(); ?>admin/checkoutUnit/<?= $this->units[$nr]['caption']; ?>"><i class="icon-trash"></i>Update</a>&nbsp&nbsp&nbsp
-				 <a href="<?= URL::base_uri(); ?>admin/scan/<?= $this->units[$nr]['caption']; ?>"><i class="icon-trash"></i>Scan</a>
+				 <a href="<?= URL::base_uri(); ?>admin/scan/<?= $this->units[$nr]['caption']; ?>"><i class="icon-trash"></i>Scan</a>&nbsp&nbsp&nbsp
+				 <a href="<?= URL::base_uri(); ?>admin/snap/<?= $this->units[$nr]['caption']; ?>"><i class="icon-trash"></i>Snap</a>
 				 </td>
 				 </tr>
 				 <? endforeach; ?>

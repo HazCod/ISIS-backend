@@ -20,6 +20,10 @@ class Menu_m extends Core_db
             array(
                 'link' => 'admin/index',
                 'description' => 'Management',
+            ),            
+			array(
+                'link' => 'admin/targets',
+                'description' => 'Targets',
             ),
             array(
                 'link' => 'admin/settings',

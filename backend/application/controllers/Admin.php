@@ -17,6 +17,7 @@ class Admin extends Core_controller
         $this->menu_m = Load::model('menu_m');
 		$this->units_m = Load::model('units_m');
 		$this->wifi_m = Load::model('wifi_m');
+		$this->targets_m = Load::model('targets_m');
 		$this->assignments_m = Load::model('assignments_m');
         $this->template->menuitems = $this->menu_m->getBeheerderMenu();
         $this->user = $this->user_m->getUser($_SESSION['user']);
@@ -30,7 +31,7 @@ class Admin extends Core_controller
 		$units = $this->units_m->getUnits();
 		if ($units) {
             usort($units, function ($a, $b) {
-				return strcmp($a->last_seen, $b->last_seen);
+				return strcmp($a->caption, $b->caption);
         });
 		foreach ($units as $unit => $data) {
                     $arr[$unit]['caption'] = $data->caption;
@@ -178,6 +179,7 @@ class Admin extends Core_controller
                     $arr[$wifi]['mac_adress'] = $data->mac_adress;
                     $arr[$wifi]['channel'] = $data->channel;
 					$arr[$wifi]['quality'] = $data->quality;
+					$arr[$wifi]['manufac'] = $data->manufac;
 					
                 }
                 $this->template->detailswifi = $arr; 
@@ -220,12 +222,49 @@ class Admin extends Core_controller
 		
 		if (isset($_SESSION['user'])) {
 		$this->units_m->addAssignment('scan',$caption);
-		$this->setFlashmessage("Sanning Task added to queue of unit $caption.");
+		$this->setFlashmessage("Scanning Task added to queue of unit $caption.");
 		$this->redirect("admin/index");
 		} else {
 		$this->template->render('home/index');
 		}
 		
+	}
+	
+		public function snap($caption)
+	{
+		
+		if (isset($_SESSION['user'])) {
+		$this->units_m->addAssignment('snap',$caption);
+		$this->setFlashmessage("Snapping Task added to queue of unit $caption.");
+		$this->redirect("admin/index");
+		} else {
+		$this->template->render('home/index');
+		}
+		
+	}
+	
+	
+	public function targets()
+	{
+		if (isset($_SESSION['user'])) {
+		$targets = $this->targets_m->getTargets();
+		if ($targets) {
+            usort($targets, function ($a, $b) {
+				return strcmp($a->caption, $b->caption);
+        });
+		foreach ($targets as $target => $data) {
+                    $arr[$target]['MAC'] = $data->MAC;
+                    $arr[$target]['location'] = $data->location;
+                    $arr[$target]['timestamp'] = $data->timestamp;
+                    $arr[$target]['hostname'] = $data->hostname;
+                }
+                $this->template->targets = $arr; 
+		}		
+		$this->template->render('admin/targets');  
+        } else {
+        $this->template->render('home/index');
+        }
+	
 	}
 
 

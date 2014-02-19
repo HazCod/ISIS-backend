@@ -73,7 +73,7 @@
                         <td style="color:green;">
                         <? elseif ($unit2 == 'new'): ?>
                         <td style="color:orange;">
-                        <? elseif ($unit2 == 'errors'): ?>
+                        <? elseif ($unit2 == 'error'): ?>
                         <td style="color:red;">
                         <? else: ?><td><? endif; ?>
                         <?= $unit2; ?></td>
@@ -89,6 +89,13 @@
             <p><b>No assignments yet</b></p>
         <? endif; ?>
 		
+	</div>
+	</div>
+	
+	<div class="row">
+    <div class="span12">
+		<h3>Last Snap</h3>
+		<img src="../../../img/Afbeeldingen/image.jpg" alt="test" height="400" width="500">
 	</div>
 	</div>
 
