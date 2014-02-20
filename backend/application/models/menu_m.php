@@ -22,7 +22,7 @@ class Menu_m extends Core_db
                 'description' => 'Management',
             ),            
 			array(
-                'link' => 'admin/targets',
+                'link' => 'targets',
                 'description' => 'Targets',
             ),
             array(

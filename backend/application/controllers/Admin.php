@@ -242,30 +242,5 @@ class Admin extends Core_controller
 		}
 		
 	}
-	
-	
-	public function targets()
-	{
-		if (isset($_SESSION['user'])) {
-		$targets = $this->targets_m->getTargets();
-		if ($targets) {
-            usort($targets, function ($a, $b) {
-				return strcmp($a->caption, $b->caption);
-        });
-		foreach ($targets as $target => $data) {
-                    $arr[$target]['MAC'] = $data->MAC;
-                    $arr[$target]['location'] = $data->location;
-                    $arr[$target]['timestamp'] = $data->timestamp;
-                    $arr[$target]['hostname'] = $data->hostname;
-                }
-                $this->template->targets = $arr; 
-		}		
-		$this->template->render('admin/targets');  
-        } else {
-        $this->template->render('home/index');
-        }
-	
-	}
-
 
 }
