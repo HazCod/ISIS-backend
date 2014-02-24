@@ -9,6 +9,10 @@
 		<? if ($this->targets): ?>
 
             <table class="table table-striped">
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7669d1a5812140747f920fc2a2b50c3ded84e22c
                 <thead>
                 <tr>
                     <? foreach ($this->targets[0] as $titel => $data): ?>
@@ -22,6 +26,7 @@
                 <? foreach ($this->targets as $nr => $data): ?>
 				<tr>
 					<? foreach ($data as $nrunit => $unit): ?>
+<<<<<<< HEAD
                     <? if ($nrunit == 'Verbonden Access Point'): ?>
                     <td><a href="<?= URL::base_uri(); ?>admin/ap/<?= ltrim($unit); ?>"><?= $unit; ?></a></td>
                     <? else: ?>
@@ -36,6 +41,15 @@
                  </tr>
                  </tr>
 				 <? endforeach; ?>			
+=======
+					
+                        <td><?= $unit; ?></td>
+						
+                 <? endforeach; ?>
+				 </tr>
+				 <? endforeach; ?>
+				
+>>>>>>> 7669d1a5812140747f920fc2a2b50c3ded84e22c
                 </tbody>
             </table>
 			

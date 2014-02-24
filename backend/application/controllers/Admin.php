@@ -242,7 +242,10 @@ class Admin extends Core_controller
 		}
 		
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7669d1a5812140747f920fc2a2b50c3ded84e22c
 
 	public function ap($ap=false){
 		if (isset($_SESSION['user']) && $ap != false){
