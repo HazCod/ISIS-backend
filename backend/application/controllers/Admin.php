@@ -127,13 +127,13 @@ class Admin extends Core_controller
 	{
 	if (isset($_SESSION['user'])) {
 		if ($_POST) {
-		$formdata = $this->form->getPost();
-		$this->units_m->editLocation($formdata->location,$caption);
-		$this->setFlashmessage("Location of unit $caption  has been changed to $formdata->location.");
-		$this->redirect('admin/index');
+			$formdata = $this->form->getPost();
+			$this->units_m->editLocation(strtolower($formdata->location),$caption);
+			$this->setFlashmessage("Location of unit $caption  has been changed to $formdata->location.");
+			$this->redirect('admin/index');
 		} else {
-		$this->template->unit = $caption;
-		$this->template->render('admin/editLocation');
+			$this->template->unit = $caption;
+			$this->template->render('admin/editLocation');
 		}
 	} else {
 		$this->template->render('home/index');
@@ -172,7 +172,7 @@ class Admin extends Core_controller
 		$detailswifi = $this->wifi_m->getDetailWifi($caption,$wifi_network);
 		if ($detailswifi) {
             usort($detailswifi, function ($a, $b) {
-				return strcmp($a->moment, $b->moment);
+				return strcmp($a->last_updated, $b->last_updated);
         });
 		foreach ($detailswifi as $wifi => $data) {
                     
@@ -208,11 +208,11 @@ class Admin extends Core_controller
 	{
 		
 		if (isset($_SESSION['user'])) {
-		$this->units_m->addAssignmentParam('crackWifiUnit',$caption,$wifi_network);
-		$this->setFlashmessage("Cracking Task added to queue of unit $caption.");
-		$this->redirect("admin/units/$caption");
+			$this->units_m->addAssignmentParam('crackWifiUnit',$caption,$wifi_network);
+			$this->setFlashmessage("Cracking Task added to queue of unit $caption.");
+			$this->redirect("admin/units/$caption");
 		} else {
-		$this->template->render('home/index');
+			$this->template->render('home/index');
 		}
 		
 	}
@@ -221,11 +221,11 @@ class Admin extends Core_controller
 	{
 		
 		if (isset($_SESSION['user'])) {
-		$this->units_m->addAssignment('scan',$caption);
-		$this->setFlashmessage("Scanning Task added to queue of unit $caption.");
-		$this->redirect("admin/index");
+			$this->units_m->addAssignment('scan',$caption);
+			$this->setFlashmessage("Scanning Task added to queue of unit $caption.");
+			$this->redirect("admin/index");
 		} else {
-		$this->template->render('home/index');
+			$this->template->render('home/index');
 		}
 		
 	}
@@ -238,34 +238,26 @@ class Admin extends Core_controller
 		$this->setFlashmessage("Snapping Task added to queue of unit $caption.");
 		$this->redirect("admin/index");
 		} else {
-		$this->template->render('home/index');
+			$this->template->render('home/index');
 		}
 		
 	}
-	
-	
-	public function targets()
-	{
-		if (isset($_SESSION['user'])) {
-		$targets = $this->targets_m->getTargets();
-		if ($targets) {
-            usort($targets, function ($a, $b) {
-				return strcmp($a->caption, $b->caption);
-        });
-		foreach ($targets as $target => $data) {
-                    $arr[$target]['MAC'] = $data->MAC;
-                    $arr[$target]['location'] = $data->location;
-                    $arr[$target]['timestamp'] = $data->timestamp;
-                    $arr[$target]['hostname'] = $data->hostname;
-                }
-                $this->template->targets = $arr; 
-		}		
-		$this->template->render('admin/targets');  
-        } else {
-        $this->template->render('home/index');
-        }
-	
-	}
 
+
+	public function ap($ap=false){
+		if (isset($_SESSION['user']) && $ap != false){
+			$ap_t = trim($ap);
+			$this->template->ap = $ap_t;
+			$this->template->manufac = $this->wifi_m->getManufacturer($ap_t)->manufac;
+			//$this->setCurrentFlashmessage($this->template->manufac);
+			$this->template->wifis   = $this->wifi_m->getAPnetworks($ap_t);
+			$this->template->devices = $this->wifi_m->getAPdevices($ap_t);
+			//$this->setCurrentFlashmessage($this->template->devices);
+			$this->template->render('admin/ap');
+		} else {
+			$this->setFlashmessage('Insufficient permissions or no parameter given.');
+			$this->redirect('home/index');
+		}
+	}
 
 }

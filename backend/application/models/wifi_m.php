@@ -44,7 +44,7 @@ class Wifi_m extends Core_db
 			WHERE (caption = '$caption') and (wifi_network = '$wifi_network')
         ";
 
-        $bookings = $this->db->query($query,$captions,$wifi_network)->getResult();
+        $bookings = $this->db->query($query)->getResult();
 
         if ($bookings) {
             $result = $bookings;
@@ -53,6 +53,61 @@ class Wifi_m extends Core_db
         return $result;
 		
 	}
+
+    public function getAPnetworks( $ap ){
+        $result = false;
+
+        $query = "
+            SELECT wifi_network, channel, encryption
+            FROM ap_info
+            WHERE mac_adress = '$ap'
+            GROUP BY wifi_network
+        ";
+
+        $bookings = $this->db->query($query)->getResult();
+
+        if ($bookings) {
+            $result = $bookings;
+        }
+
+        return $result;
+    }
+
+    public function getManufacturer( $ap ){
+        $result = false;
+
+        $query = "
+            SELECT manufac
+            FROM ap_info
+            WHERE (mac_adress = '$ap')
+            GROUP BY manufac
+        ";
+
+        $bookings = $this->db->query($query)->getRow();
+
+        if ($bookings) {
+            $result = $bookings;
+        }
+
+        return $result;
+    }
+
+    public function getAPdevices( $ap ){
+        $result = false;
+        $query = "
+            SELECT *
+            FROM target_devices
+            WHERE (associated_ap = '$ap');
+        ";
+
+        $bookings = $this->db->query($query)->getResult();
+
+        if ($bookings) {
+            $result = $bookings;
+        }
+
+        return $result; 
+    }
 
 
 }

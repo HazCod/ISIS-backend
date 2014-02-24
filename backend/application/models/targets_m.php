@@ -30,6 +30,24 @@ class Targets_m extends Core_db
         return $result;
     }
 
+    public function getProbes($client){
+        $result = false;
+
+        $query = "
+            SELECT SSID
+            FROM probed_networks
+            WHERE MAC = '$client';
+        ";
+
+        $bookings = $this->db->query($query)->getResult();
+
+        if ($bookings) {
+            $result = $bookings;
+        }
+
+        return $result;
+    }
+
 
 }
 
