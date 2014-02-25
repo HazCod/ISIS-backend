@@ -11,21 +11,14 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <? foreach ($this->probes[0] as $titel => $data): ?>
-                        <th><?= ucfirst($titel); ?></th>
-                    <? endforeach; ?>
-                    <th></th>
+                    <th>Probed Networks</th>
                 </tr>
                 </thead>
 
                 <tbody>
-                <? foreach ($this->probes as $nr => $data): ?>
-				<tr>
-					<? foreach ($data as $nrunit => $unit): ?>
-                    <td><?= $unit; ?></td>		
-                    <? endforeach; ?>
+                <? foreach ($this->probes as $data): ?>
+                    <td><?= $data; ?></td>		
                  <td>   
-                 </tr>
                  </tr>
 				 <? endforeach; ?>			
                 </tbody>
