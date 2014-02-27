@@ -7,6 +7,7 @@ import os.path
 
 from database import *
 import crack_wpa
+
 # File created when assignment is still running
 file_busy = '/tmp/busy'
 
