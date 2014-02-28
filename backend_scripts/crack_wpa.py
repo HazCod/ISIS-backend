@@ -36,7 +36,8 @@ def post(ESSID, key):
 	else:
 		raise Exception("cracking failed") 
 
-def automate(BSSID, ESSID, file="/home/isis/psk-01.cap"):
+def automate(BSSID, ESSID, file="psk-01.cap"):
+	file= "/home/isis/"+file
 	crak(BSSID, file)
 	key=process_output()
 	post(ESSID, key)

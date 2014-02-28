@@ -70,7 +70,7 @@ if command == "crack_wpa":
 		opdrachtexecute()
 		print ("oprdacht uitvoeren")
 		paraparts= parameter.split("|")
-		crack_wpa.automate(paraparts[0],paraparts[1])
+		crack_wpa.automate(paraparts[0],paraparts[1], paraparts[2])
 		opdrachtvolbracht()
 	except Exception, e:
 		opdrachterror(str(e))
