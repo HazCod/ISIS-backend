@@ -6,7 +6,7 @@ from database import *
 import sys
 
 def crak(BSSID, file, wordlist="/usr/share/dict/british-english"):
-	command=["sudo","aircrack-ng","-w"]
+	command=["aircrack-ng","-w"]
 	command.append(wordlist)
 	command.append("-b")
 	command.append(BSSID)
