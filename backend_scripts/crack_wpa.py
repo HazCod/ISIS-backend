@@ -3,6 +3,7 @@
 import subprocess
 import string
 from database import *
+import sys
 
 def crak(BSSID, file, wordlist="/usr/share/dict/british-english"):
 	command=["sudo","aircrack-ng","-w"]
@@ -43,5 +44,7 @@ def automate(BSSID, ESSID, file="psk-01.cap"):
 	post(ESSID, key)
 
 if __name__ == '__main__':
-	crak("00:21:91:04:B9:25")
-	process_output()
+	BSSID=sys.argv[1]
+	ESSID=sys.argv[2]
+	file=sys.argv[3]
+	automate(BSSID, ESSID, file)
