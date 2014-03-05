@@ -24,12 +24,14 @@
                 <? foreach ($this->units as $nr => $data): ?>
 				<tr>
 					<? foreach ($data as $nrunit => $unit): ?>
-					
-                        <td><?= $unit; ?></td>
+					<? if ($nrunit == "caption" ): ?>
+					<td><a href="<?= URL::base_uri(); ?>admin/units/<?= $this->units[$nr]['caption']; ?>"><i class="icon-trash"></i><?= $unit; ?></a></td>&nbsp&nbsp&nbsp
+					<? else: ?>
+                    <td><?= $unit; ?></td>
+					<? endif; ?>
 						
                  <? endforeach; ?>
 				 <td>
-				 <a href="<?= URL::base_uri(); ?>admin/units/<?= $this->units[$nr]['caption']; ?>"><i class="icon-trash"></i>Details</a>&nbsp&nbsp&nbsp
 				 <a href="<?= URL::base_uri(); ?>admin/editLocation/<?= $this->units[$nr]['caption']; ?>"><i class="icon-trash"></i>Edit location</a>&nbsp&nbsp&nbsp
 				 <a href="<?= URL::base_uri(); ?>admin/deleteUnit/<?= $this->units[$nr]['caption']; ?>"><i class="icon-trash"></i>Remove</a>&nbsp&nbsp&nbsp
 				 <a href="<?= URL::base_uri(); ?>admin/checkoutUnit/<?= $this->units[$nr]['caption']; ?>"><i class="icon-trash"></i>Update</a>&nbsp&nbsp&nbsp

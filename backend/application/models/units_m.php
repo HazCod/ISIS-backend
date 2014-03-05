@@ -53,7 +53,7 @@ class Units_m extends Core_db
         $query = "
             SELECT *
             FROM units
-            WHERE location = '$location'
+            WHERE location = '$location' AND location != 'isis-Optiplex-755'
         ";
         $bookings = $this->db->query($query)->getResult();
 
@@ -130,6 +130,11 @@ class Units_m extends Core_db
 		$query = $query . ';';
 		#return $query;
 		return $this->db->query($query);
+	}
+
+	public function getDeviceInfo($device){
+		$query = "SELECT info FROM target_devices WHERE mac = '$device';"; 
+		return $this->db->query($query)->getRow();
 	}
 	
 

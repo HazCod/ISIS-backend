@@ -5,7 +5,17 @@
         </div>
 <div class="row">
     <div class="span12">
-        <h2>Unit <b><?= $this->unit; ?></b></h2>
+        <h2>Unit <b><?= $this->unit; ?></b>
+		<? if ($this->assignments[0]['assignment'] == "rogue" AND $this->assignments[0]['status'] == "busy"): ?>		
+		is going rogue 
+		<? endif; ?>
+		</h2>
+		<? if ($this->assignments[0]['assignment'] == "rogue" AND $this->assignments[0]['status'] == "busy"): ?>
+		<h5>
+		<a href="<?= URL::base_uri(); ?>admin/stopRogue/<?= $this->unit; ?>"><i class="icon-trash"></i>Stop Rogue</a>&nbsp&nbsp&nbsp 
+		</h5>
+		<? endif; ?>
+		
         <p><strong>Last seen:</strong>&nbsp;<?= $this->lastseen; ?></p>
         
 		<h3>Found WiFi connections</h3>
@@ -31,9 +41,17 @@
 						
                  <? endforeach; ?>
 				 <td>
-				 <a href="<?= URL::base_uri(); ?>admin/connectWifiUnit/<?= $this->unit; ?>/<?= $this->wifis[$nr]['wifi_network']; ?>"><i class="icon-trash"></i>Connect</a>&nbsp&nbsp&nbsp 
-				 <a href="<?= URL::base_uri(); ?>admin/crackWifiUnit/<?= $this->unit; ?>/<?= $this->wifis[$nr]['wifi_network']; ?>"><i class="icon-trash"></i>Crack&nbsp&nbsp&nbsp </a>
-				 <a href="<?= URL::base_uri(); ?>admin/detailWifi/<?= $this->unit; ?>/<?= $this->wifis[$nr]['wifi_network']; ?>"><i class="icon-trash"></i>Details</a></td>
+				 <a href="<?= URL::base_uri(); ?>admin/connectWifiUnit/<?= $this->unit; ?>/<?= $this->wifis[$nr]['wifi_network']; ?>"><i class="icon-trash"></i>Connect</a>&nbsp;&nbsp;&nbsp;
+				 <? if ($data['encryption'] != "open"): ?>
+				 <a href="<?= URL::base_uri(); ?>admin/crackWifiUnit/<?= $this->unit; ?>/<?= $this->wifis[$nr]['wifi_network']; ?>"><i class="icon-trash"></i>Crack</a>&nbsp;&nbsp;&nbsp;
+				 <? endif; ?>
+				 <a href="<?= URL::base_uri(); ?>admin/detailWifi/<?= $this->unit; ?>/<?= $this->wifis[$nr]['wifi_network']; ?>"><i class="icon-trash"></i>Details</a>&nbsp;&nbsp;&nbsp;
+				 <? if ($data['encryption'] == "open"): ?>
+                 <a href="<?= URL::base_uri(); ?>admin/rogueAP/<?= $this->unit; ?>/<?= $this->wifis[$nr]['wifi_network']; ?>"><i class="icon-trash"></i>Go Rogue</a>&nbsp;&nbsp;&nbsp;
+                 <? endif; ?>
+                 <? if (($data['encryption'] == "open") or ($data['wifi_key'])): ?>
+                 <a href="<?= URL::base_uri(); ?>admin/nmap/<?= $this->wifis[$nr]['wifi_network']; ?>"><i class="icon-trash"></i>Nmap</a></td> 
+                 <? endif; ?>              
 				 </tr>
 				 <? endforeach; ?>
 				
@@ -79,7 +97,10 @@
                         <?= $unit2; ?></td>
 						
                  <? endforeach; ?>
-				 </tr>
+				 <td>
+				 <a href="<?= URL::base_uri(); ?>admin/removeAssignment/<?= $this->unit; ?>/<?= $this->assignments[$nr]['assignments_id']; ?>; ?>"><i class="icon-trash"></i>Remove Assignment</a>&nbsp&nbsp&nbsp 
+				</td>													
+				</tr>
 				 <? endforeach; ?>
 				
                 </tbody>

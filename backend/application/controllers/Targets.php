@@ -85,7 +85,10 @@ class Targets extends Core_controller
 	public function probes($client=false){
 		if (isset($_SESSION['user']) and ($client != false)){
 			$str = $this->targets_m->getProbes($client)[0]->SSID;
-			$this->template->probes = explode("/", $str);
+			$str = explode("/", $str);
+			if (strlen(trim($str[0])) > 0){
+				$this->template->probes = $str;
+			}
 			$this->template->device = $client;
 			$this->template->render('targets/probes');
 		} else {
@@ -94,6 +97,30 @@ class Targets extends Core_controller
 		}
 	}
 
+	public function finddevices(){
+		if (isset($_SESSION['user'])){
+			$units = $this->units_m->getUnits();
+			foreach ($units as $meh => $unit) {
+				$this->units_m->addAssignment('finddevices', $unit->caption);
+			}
+			$this->setFlashMessage('Sent assignment Find Devices to all units.');
+			$this->redirect('targets/index');
+		} else {
+			$this->setFlashMessage('Invalid argument supplied.');
+			$this->redirect('targets/index');
+		}
+	}
+
+	public function info($device = false){
+		if (isset($_SESSION['user']) && $device != false){
+			$this->template->info = $this->units_m->getDeviceInfo($device)->info;
+			$this->template->device = $device;
+			$this->template->render('targets/info');
+		} else {
+			$this->setFlashMessage('CANT ACCESS HERE BRO', 'error');
+			$this->redirect('home/index');
+		}
+	}
 
 }
 

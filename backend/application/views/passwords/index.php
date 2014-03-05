@@ -5,14 +5,15 @@
         </div>
 <div class="row">
     <div class="span12">
-        <h2>Found targets: </h2>
-		<? if ($this->targets): ?>
+        <h2>Found passwords</h2>
+		
+		<? if ($this->passwords): ?>
 
             <table class="table table-striped">
 
                 <thead>
                 <tr>
-                    <? foreach ($this->targets[0] as $titel => $data): ?>
+                    <? foreach ($this->passwords[0] as $titel => $data): ?>
                         <th><?= ucfirst($titel); ?></th>
                     <? endforeach; ?>
                     <th></th>
@@ -20,7 +21,7 @@
                 </thead>
 
                 <tbody>
-                <? foreach ($this->targets as $nr => $data): ?>
+                <? foreach ($this->passwords as $nr => $data): ?>
 				<tr>
 					<? foreach ($data as $nrunit => $unit): ?>
 					
@@ -34,10 +35,11 @@
             </table>
 			
         <? else: ?>
-            <p><b>No targets found</b></p>
+            <p><b>No found passwords.</b></p>
         <? endif; ?>
 		
     </div>
+	
     </div>
-</div>
 
+</div>

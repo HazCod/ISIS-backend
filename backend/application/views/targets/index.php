@@ -5,7 +5,7 @@
         </div>
 <div class="row">
     <div class="span12">
-        <h2>Found targets: </h2>
+        <h2>Found targets: </h2><div style="float:right;"><a href="<?= URL::base_uri(); ?>targets/finddevices"><strong>Find Devices</strong></a></div>
 		<? if ($this->targets): ?>
 
             <table class="table table-striped">
@@ -29,10 +29,11 @@
                     <? endif; ?>	
                     <? endforeach; ?>
                  <td>   
+                 <a href="<?= URL::base_uri(); ?>targets/probes/<?= $data['MAC'] ?>"><i class="icon-trash"></i>Probing list&nbsp;&nbsp;</a>-
                  <? if ($data['Verbonden Access Point']): ?>
-                 <a href="<?= URL::base_uri(); ?>targets/kickunit/<?= $data['location']; ?>/<?= $data['MAC'] ?>/<?= ltrim($data['Verbonden Access Point']); ?>"><i class="icon-trash"></i>Kick from AP&nbsp;&nbsp;</a>
+                 <a href="<?= URL::base_uri(); ?>targets/kickunit/<?= $data['location']; ?>/<?= $data['MAC'] ?>/<?= ltrim($data['Verbonden Access Point']); ?>"><i class="icon-trash"></i>Kick from AP</a>-
                  <? endif; ?>
-                 <a href="<?= URL::base_uri(); ?>targets/probes/<?= $data['MAC'] ?>"><i class="icon-trash"></i>Probing list</a>
+                 <a href="<?= URL::base_uri(); ?>targets/info/<?= $data['MAC'] ?>"><i class="icon-trash"></i>info</a>
                  </tr>
                  </tr>
 				 <? endforeach; ?>			

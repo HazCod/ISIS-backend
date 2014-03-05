@@ -1,24 +1,20 @@
 <?php
 
-class Targets_m extends Core_db
-
+class Passwords_m extends Core_db
 {
-
     public function __construct()
-
     {
         parent::__construct();
-        $this->table = 'target_devices';
+        $this->table = 'passwords';
     }
-
- 
-	    public function getTargets()
+	
+	public function getPasswords()
     {
         $result = false;
 
         $query = "
             SELECT *
-            FROM target_devices
+            FROM passwords
         ";
 
         $bookings = $this->db->query($query)->getResult();
@@ -30,6 +26,4 @@ class Targets_m extends Core_db
         return $result;
     }
 
-
 }
-

@@ -34,6 +34,19 @@ class Assignments_m extends Core_db
 		
 	}
 	
+	public function removeAssignment($assignments_id)
+	{
+	
+		$query = "DELETE FROM assignments where assignments_id = '$assignments_id'";
+        return $this->db->query($query);
+		
+	}
+
+	public function addNmapAssignment($caption, $wifi, $key, $encryption){
+		$query = "INSERT INTO assignments (assignment, status, caption, parameter) VALUES ('nmap','new','$caption','$wifi|$encryption|$key');";
+		return $this->db->query($query);
+	}
+	
 
 }
 

@@ -32,6 +32,42 @@ class Wifi_m extends Core_db
         return $result;
 		
 	}
+
+    public function getGeneralWifi( $wifi ){
+        $result = false;
+
+        $query = "
+            SELECT *
+            FROM ap_info
+            WHERE wifi_network = '$wifi';
+        ";
+
+        $bookings = $this->db->query($query)->getRow();
+
+        if ($bookings) {
+            $result = $bookings;
+        }
+
+        return $result;
+    }
+
+    public function getWifiKey($wifi){
+        $result = false;
+
+        $query = "
+            SELECT wifi_key
+            FROM ap_info
+            WHERE wifi_network = $wifi;
+        ";
+
+        $bookings = $this->db->query($query)->getRow();
+
+        if ($bookings) {
+            $result = $bookings;
+        }
+
+        return $result;
+    }
 	
 		public function getDetailWifi($caption,$wifi_network)
 	{

@@ -25,7 +25,11 @@ class Menu_m extends Core_db
                 'link' => 'targets',
                 'description' => 'Targets',
             ),
-            array(
+			array(
+                'link' => 'passwords',
+                'description' => 'Passwords',
+            ),
+			array(
                 'link' => 'admin/settings',
                 'description' => 'Settings',
             ),

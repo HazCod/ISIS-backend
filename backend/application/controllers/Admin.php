@@ -34,7 +34,7 @@ class Admin extends Core_controller
 				return strcmp($a->caption, $b->caption);
         });
 		foreach ($units as $unit => $data) {
-                    $arr[$unit]['caption'] = $data->caption;
+                    $arr[$unit]['caption'] = $data->caption; 
                     $arr[$unit]['location'] = $data->location;
                     $arr[$unit]['time_added'] = $data->time_added;
                     $arr[$unit]['last_seen'] = $data->last_seen;
@@ -87,7 +87,8 @@ class Admin extends Core_controller
   //       });
 		foreach ($assignments  as $assignment => $data) {
                     
-                    $arr2[$assignment]['assignment'] = $data->assignment;
+                    $arr2[$assignment]['assignments_id'] = $data->assignments_id;
+					$arr2[$assignment]['assignment'] = $data->assignment;
                     $arr2[$assignment]['status'] = $data->status;
                     if (!$data->parameter){
                     	$arr2[$assignment]['parameter'] = '/';
@@ -248,7 +249,10 @@ class Admin extends Core_controller
 		if (isset($_SESSION['user']) && $ap != false){
 			$ap_t = trim($ap);
 			$this->template->ap = $ap_t;
-			$this->template->manufac = $this->wifi_m->getManufacturer($ap_t)->manufac;
+			$tmp = $this->wifi_m->getManufacturer($ap_t);
+			if ($mp){
+				$this->template->manufac = $manufac;
+			}
 			//$this->setCurrentFlashmessage($this->template->manufac);
 			$this->template->wifis   = $this->wifi_m->getAPnetworks($ap_t);
 			$this->template->devices = $this->wifi_m->getAPdevices($ap_t);
@@ -257,6 +261,61 @@ class Admin extends Core_controller
 		} else {
 			$this->setFlashmessage('Insufficient permissions or no parameter given.');
 			$this->redirect('home/index');
+		}
+	}
+	
+	public function rogueAP($caption,$wifi_network){
+		
+		if (isset($_SESSION['user'])) {
+			$this->units_m->addAssignmentParam('rogue',$caption,$wifi_network);
+			$this->setFlashmessage("$caption is going rogue.");
+			$this->redirect("admin/units/$caption");
+		} else {
+			$this->template->render('home/index');
+		}
+	}
+	
+	public function removeAssignment($caption,$assignments_id){
+		
+		if (isset($_SESSION['user'])) {
+			$this->assignments_m->removeAssignment($assignments_id);
+			$this->setFlashmessage("Assignment removed");
+			$this->redirect("admin/units/$caption");
+		} else {
+			$this->template->render('home/index');
+		}
+	
+	}
+	
+	public function stopRogue($caption){
+	
+		if (isset($_SESSION['user'])) {
+			$this->units_m->addAssignment('stoprogue',$caption);
+			$this->setFlashmessage("Rogue has stopped !");
+			$this->redirect("admin/units/$caption");
+		} else {
+			$this->template->render('home/index');
+		}
+	}
+
+	public function nmap( $wifi ){
+		if (isset($_SESSION['user'])){
+			$zwifi = $this->wifi_m->getGeneralWifi($wifi);
+			
+			if (isset($zwifi->key)	 or $zwifi->encryption == "open"){
+				$units = $this->units_m->getUnitsByWifi($wifi);
+				foreach ($units as $unit){
+					//var_dump($unit); quit(); //
+					$this->assignments_m->addNmapAssignment($unit->caption,$wifi, $zwifi->wifi_key, $zwifi->encryption);
+				}
+				$this->setFlashmessage("Assignment nmap added.");
+				$this->redirect("admin/index");
+			} else {
+				$this->setFlashmessage("No key has been found yet for $wifis",'danger');
+				$this->redirect('admin/index');
+			}
+		} else {
+			$this->template->render('home/index');
 		}
 	}
 
