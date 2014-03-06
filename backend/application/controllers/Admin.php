@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 class Admin extends Core_controller
 {
@@ -301,17 +301,15 @@ class Admin extends Core_controller
 	public function nmap( $wifi ){
 		if (isset($_SESSION['user'])){
 			$zwifi = $this->wifi_m->getGeneralWifi($wifi);
-			
-			if (isset($zwifi->key)	 or $zwifi->encryption == "open"){
+			if ($zwifi->wifi_key or $zwifi->encryption == "open"){
 				$units = $this->units_m->getUnitsByWifi($wifi);
 				foreach ($units as $unit){
-					//var_dump($unit); quit(); //
 					$this->assignments_m->addNmapAssignment($unit->caption,$wifi, $zwifi->wifi_key, $zwifi->encryption);
 				}
-				$this->setFlashmessage("Assignment nmap added.");
+				$this->setFlashmessage("Assignment nmap added. (key: $zwifi->wifi_key)");
 				$this->redirect("admin/index");
 			} else {
-				$this->setFlashmessage("No key has been found yet for $wifis",'danger');
+				$this->setFlashmessage("No key has been found yet for $wifi",'danger');
 				$this->redirect('admin/index');
 			}
 		} else {
