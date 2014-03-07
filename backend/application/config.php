@@ -9,10 +9,10 @@ $db_config = array(
     'driver' => 'mysql',
     'username' => $username,
     'password' => $password,
-    'schema' => 'c7185zrc_isis',
+    'schema' => 'test',
     'dsn' => array(
         'host' => 'localhost',
-        'dbname' => 'c7185zrc_isis',
+        'dbname' => 'test',
         'port' => '3306',
     )
 );
