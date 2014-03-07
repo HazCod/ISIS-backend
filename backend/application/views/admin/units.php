@@ -50,7 +50,7 @@
                  <a href="<?= URL::base_uri(); ?>admin/rogueAP/<?= $this->unit; ?>/<?= $this->wifis[$nr]['wifi_network']; ?>"><i class="icon-trash"></i>Go Rogue</a>&nbsp;&nbsp;&nbsp;
                  <? endif; ?>
                  <? if (($data['encryption'] == "open") or ($data['wifi_key'])): ?>
-                 <a href="<?= URL::base_uri(); ?>admin/nmap/<?= $this->wifis[$nr]['wifi_network']; ?>"><i class="icon-trash"></i>Nmap</a></td> 
+                 <a href="<?= URL::base_uri(); ?>admin/nmap/<?= $this->wifis[$nr]['wifi_network']; ?>" title="Note: Nmap can take long time to complete."><i class="icon-trash"></i>Nmap</a></td> 
                  <? endif; ?>              
 				 </tr>
 				 <? endforeach; ?>
