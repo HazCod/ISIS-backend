@@ -250,7 +250,7 @@ class Admin extends Core_controller
 			$ap_t = trim($ap);
 			$this->template->ap = $ap_t;
 			$tmp = $this->wifi_m->getManufacturer($ap_t);
-			if ($mp){
+			if ($tmp){
 				$this->template->manufac = $manufac;
 			}
 			//$this->setCurrentFlashmessage($this->template->manufac);
